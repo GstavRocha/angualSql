@@ -1,3 +1,4 @@
+import { NodejsService } from './nodejs.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'projetoNovo';
+  cliente: any [] = [];
+
+  constructor(private servico: NodejsService){}
+  listarTodos(): void{
+    this.servico.getCliente().subscribe({
+      next: (retorno) => this.cliente = retorno,
+      error: (erro) => {
+        console.log(erro)
+      }
+    })
+  }
 }
